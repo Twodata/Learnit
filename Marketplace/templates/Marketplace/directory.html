@@ -1,0 +1,81 @@
+{% extends 'Marketplace/base.html'%}
+<!--{% load utility_tags %}-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>{% block head %}Directory{% endblock %}</title>
+</head>
+
+<body>
+	<div class="container">
+
+		<h1>{% block title %}Directory{% endblock %}</h1>
+
+
+		{% block body %}
+
+		<br><br><br>
+
+		<h3 class = 'nav-color'align="center">Directory</h3>
+
+		{% for markets in market %}
+
+		<div class="detail" align = 'middle'>
+
+				<p><strong><a href = '{% url 'marketdetail' pk=markets.pk %}'>{{markets.businessname}}
+				</a></strong></p>  {{markets.section}} 
+				<br> {{markets.location}} | {{markets.email}} | {{markets.website}} <br />
+				{% if markets.logo != 'logo' %} 
+				<a href = '{% url 'marketdetail' pk=markets.pk %}'>
+				<img class="img-responsive" src = '{{ MEDIA_URL }}{{markets.logo}}' height = '300' width = '400'></a>
+				{% endif %}
+				<br /><br />{{markets.services|truncatewords:10}}
+
+
+		</div>
+
+		{% endfor %}
+
+
+		<div align = 'center'>
+		{% if market.has_other_pages %}
+		<ul class="pagination pagination-sm">
+		{% if market.has_previous %}
+		<li><a href="{% append_to_query page=market.previous_page_number %}">&laquo;</a></li>
+		{% else %}
+		<li class="disabled"><span>&laquo;</span></li>
+		{% endif %}
+		{% for page_number in market.paginator.page_range %}
+		{% if page_number == market.number %}
+		<li class="active">
+		<span>{{page_number}} <span class="sr-only">(current)
+		</span></span>
+		</li>
+		{% else %}
+		<li>
+		<a href="{% append_to_query page=page_number %}">{{page_number}}</a>
+		</li>
+		{% endif %}
+		{% endfor %}
+		{% if market.has_next %}
+		<li><a href="{% append_to_query page=market.next_page_number %}">&raquo;</a></li>
+		{% else %}
+		<li class="disabled"><span>&raquo;</span></li>
+		{% endif %}
+		</ul>
+		{% endif %}
+		</div>
+
+
+
+
+		{% endblock %}
+
+	</div>
+
+</body>
+
+
+</html>

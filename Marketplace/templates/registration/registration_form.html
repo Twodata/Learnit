@@ -1,0 +1,31 @@
+{% extends 'Marketplace/base.html'%}
+<!DOCTYPE html>
+
+<html>
+<head><title>{% block head %}Sign Up{% endblock %}</title></head>
+
+<body>
+
+
+		<h1>{% block title %}Sign Up{% endblock %}</h1>
+
+		{% block body %}
+
+
+	<div class="container">
+
+		<br><br><br><br>
+
+		<div class="form-group lead">
+			<h3 class="nav-color">Register Here</h3>
+			<br>
+			<form method = 'post' action = '.' >
+
+			{% csrf_token %}
+			<div >{{ form.as_p }}</div><br>
+			By registering to this website, you agree to have read the <a href = '{% url 'policy' %}'>privacy policy </a>page and accepted the terms and conditions contained therein. <br><br>
+			<input class = "btn-primary" type = 'submit' value = 'Register'/>
+		</div>
+	</div>
+
+{% endblock %}

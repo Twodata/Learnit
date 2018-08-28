@@ -1,0 +1,27 @@
+{% extends 'Marketplace/base.html'%}
+
+<html>
+
+<head>
+	<title>{% block head %}About{% endblock %}</title>
+</head>
+<body>
+
+
+
+{% block body %}
+<br><br><br><br>
+
+<h3 class='nav-color'>{% block title %}About Learnit{% endblock %}</h3>
+
+<p class="lead">Learnit is a platform that showcases enterprises/businesses with passion to help individuals acquire entrepreneurial skills and are also willing to create internship opportunities for interested persons.</p>
+<p class="lead">Users who are skilled in any of the section listed on Learnit, can also help inspire the acquisition and development of such skills in others, by contributing to the article section.</p>
+<p class="lead">Get your <a href = '{% url 'contact' %}'><b>enterprise/business</b></a> listed, kindly contribute <a href = '{% url 'addarticle' %}'><b>articles/tutorials</b></a>, help someone get an <a href = '{% url 'add_internship' %}'><b>internship opportunity</b></a>, and feel free to share planned <a href = '{% url 'add_workshop' %}'><b>training/workshop</b></a> activities.</p>
+
+
+
+{% endblock %}
+
+</body>
+</html>
+

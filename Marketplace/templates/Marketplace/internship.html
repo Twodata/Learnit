@@ -1,0 +1,51 @@
+{% extends 'Marketplace/base.html'%}
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>{% block head %}Internship{% endblock %}</title>
+</head>
+
+<body class="container">
+
+	<h1>{% block title %}Internship{% endblock %}</h1>
+
+
+	{% block body %}
+		<br><br><br>
+
+		<h3 class = 'nav-color'align="center">Internships</h3>
+
+		{% for internship in internships %}
+
+		<div class = 'detail'>
+		 <p class="nav-color"><h3><strong>{{internship.businessname | linebreaks}}
+		 </h3></strong></p><br />
+		 {% if internship.logo != 'logo' %}
+			<img class="img-responsive" src = '{{ MEDIA_URL }}{{internship.logo}}' height = '300' width = '400'>
+			{% endif %}
+			<br>
+		  <p><b>Business Profile: </b><br>{{internship.business_profile | linebreaks}}</p> <br/>
+		  <p><b>Intern Position: </b><br>{{internship.intern_position | linebreaks}}</p> <br/> 
+		  <p><b>Internship Description: </b><br>{{internship.intern_ad | linebreaks}}</p>
+						  </b>
+		<div align="right">{% if internship.added_by == request.user.username %}				   
+		 <a href = '{% url 'internship_remove' pk=internship.pk %}'>
+		 <span class='glyphicon glyphicon-trash'></span>
+		 </a>
+		 {% endif %}</div>
+		</div>
+		{% endfor %}
+
+
+		
+	
+	{% endblock %}
+
+
+</body>
+
+
+</html>

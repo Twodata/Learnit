@@ -1,0 +1,31 @@
+{% extends 'Marketplace/base.html'%}
+{% load notification_tags %}
+
+<html>
+
+<head>
+	<title>{% block head %}Notifications{% endblock %}</title>
+</head>
+<body>
+
+
+
+{% block body %}
+<br><br><br><br>
+
+<div align='center'>
+
+<h2>Notifications!</h2>
+
+<br><br>
+
+{% user_notifications %}
+
+
+</div>
+
+{% endblock %}
+
+</body>
+</html>
+

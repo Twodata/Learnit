@@ -1,0 +1,43 @@
+{% extends 'Marketplace/base.html'%}
+<!--{% load utility_tags %}-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>{% block head %}Search Result{% endblock %}</title>
+
+</head>
+
+<body>
+	<div class="container">
+			<h1>{% block title %}Search Result{% endblock %}</h1>
+
+
+			{% block body %}
+
+			<br><br><br><br>
+
+
+			<div class = 'detail' align = 'center'>
+
+			{% for results in result %}
+			<p><a href = '{% url 'articledetail' pk=results.pk %}'>{{ results.topic }}</a></p>
+			<p><a href = '{% url 'marketdetail' pk=results.pk %}'>{{ results.businessname }}</a></p>
+			{% empty %}
+			<b>No match was found for this search!</b>
+			{% endfor %}
+        <hr id="search">
+
+			</div>
+
+        
+
+			{% endblock %}
+
+	</div>
+
+</body>
+
+
+</html>

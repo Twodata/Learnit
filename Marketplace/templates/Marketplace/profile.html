@@ -1,0 +1,106 @@
+{% extends 'Marketplace/base.html'%}
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>{% block head %} {{ selecteduser.username }}'s Page{% endblock %}</title>
+</head>
+
+<body>
+	
+{% block body %}
+
+<br><br><br><br>
+
+
+<div align='center'>
+    <h3 class='nav-color'>{% block title %} {{ selecteduser.username }}'s Page {% endblock %}</h3>
+    
+    <img src='{{ MEDIA_URL }}{{userprofile.picture}}' width='300' height='300'
+    alt='' />
+    <br/><br/>
+    <p><b>Website:</b><a href='{{ userprofile.website  }}'> 
+         {{ userprofile.website | linebreaks }}</a></p>
+    <p><b>Skillset:</b> {{ userprofile.skillset | linebreaks }}</p>
+    <p><b>Quote:</b> <cite>{{ userprofile.quote | linebreaks }}</cite></p>
+  
+   
+    <br>
+    {% if selecteduser.username != user.username %}    
+        {% if selecteduser not in follower %}
+       <a href='{% url 'change_friend' operation='add' pk=selecteduser.pk %}'>
+       <button type='button'>Follow</button>
+       </a><br/>
+       {% endif %}
+       
+       {% if selecteduser in follower %}
+        <a href='{% url 'change_friend' operation='remove' pk=selecteduser.pk %}'>
+       <button type='button'>Unfollow</button>
+       </a>
+       {% endif %}
+   {% endif %}
+  
+    
+    
+    <div>
+    {% if selecteduser.username == user.username %}
+    <hr>
+        <form action = '.' method = 'POST' enctype = 'multipart/form-data'>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input class = 'submit btn-primary' type = 'submit' name = 'submit' value = 'Update' />
+        </form>
+        <hr>
+        <p><a href="{% url 'password_change' %}">Change Password</a></p>
+        <p><a href='{% url 'addarticle' %}'>Post Article</a></p>
+        <p><a href = '{% url 'contact' %}'>List Business/Enterprise</a></p>
+        <p><a href = '{% url 'add_internship' %}'>Publish Internship</a></p>
+        <p><a href = '{% url 'add_workshop' %}'>Publish Workshop/Training</a></p>
+        <p><a href='{% url 'notifications:all' %}'>Notifications</a></p>
+    {% endif %}
+    </div>
+    
+    <hr>
+    <b>Articles:</b>
+            
+   {% for post in userarticles %}
+    <div align = 'center'>
+    
+    	<b><a href = '{% url 'articledetail' pk=post.pk %}'>{{post.topic|title}}</a></b>
+    	<b>|</b> <em>{{post.section}}</em>
+    	<b>|</b> <b id="star"><span class='glyphicon glyphicon-star-empty'></span>
+    				{{post.likes}}</b>
+    	<b>|</b> {{post.date_posted}}
+    	   	 			 
+    		 
+    	</div>    	
+    {% empty %}	
+    	<p>None.</p>
+	{% endfor %}
+	
+	<hr>	
+
+<b>Following:</b>
+</br>
+{% for friends in friends %}
+
+<a href="{% url 'profile' username=friends %}">
+ {{ friends }} ,
+</a>
+
+{% empty %}	
+    	<p>None.</p>
+
+{% endfor %}
+
+</div>
+
+<br><br>
+{% endblock %}
+
+</body>
+
+
+</html>

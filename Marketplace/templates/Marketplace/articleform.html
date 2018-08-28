@@ -1,0 +1,54 @@
+{% extends 'Marketplace/base.html'%}
+<html>
+
+<head>
+<title>{% block head %}Article{% endblock %}</title>
+</head>
+
+
+
+<body class="container">
+
+		<h1>{% block title %}Article Form{% endblock %}</h1>
+
+		{% block body%}
+
+		<br><br><br>
+
+
+		<div class="lead">
+    		<h3 class='nav-color'>New Post:</h3>
+			<ul>
+			<li>Please, <b>post only</b> articles/tutorials that will help users build capacity 
+			for economic empowerment and self-reliance.</li>
+			<li>For articles/tutorials not written by users, original owners should be
+			duly acknowledged and cited.</li>
+			<li>Every user is <b>solely responsible</b> for anything he/she posts on Learnit</li>
+			</ul>
+		</div>
+
+
+		<div class="form-group lead" >
+			<form action = '/Marketplace/addarticle/' 
+			method = 'POST' enctype = 'multipart/form-data'>
+			{% csrf_token %}
+
+			{% for forms in form %}
+
+
+			<strong>{{ forms.label_tag }}</strong><br />
+			{{ forms }}
+			<br />
+			<br />
+
+			{% endfor %}
+			<input class = 'submit btn-primary' type = 'submit' name = 'submit' value = 'Post' />
+
+			</form>
+		</div>
+
+		{% endblock %}
+
+</body>
+
+</html>

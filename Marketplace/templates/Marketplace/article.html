@@ -1,0 +1,65 @@
+{% extends 'Marketplace/base.html'%}
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>{% block head %}Learnit Articles{% endblock %}</title>
+</head>
+
+<body class="container">
+
+	<h1>{% block title %}Articles{% endblock %}</h1>
+
+
+	{% block body %}
+		<br><br><br>
+
+		<h3 class = 'nav-color'align="center">Articles</h3>
+
+		{% for articles in article %}
+
+		<div class = 'detail' align = 'center'>
+
+		<b><a href = '{% url 'articledetail' pk=articles.pk %}'>{{articles.topic|title}}</a></b>
+		 <em>{{articles.section}}</em><br />
+		 by <a href = '{% url 'profile' username=articles.added_by %}' id='profile'>
+		 <b>{{articles.added_by}}</b></a> <b>|</b> <b id="star"><span class='glyphicon glyphicon-star-empty'></span>
+						  {{articles.likes}}</b>
+	  <b>|</b>
+		
+		<!-- Article approval to push to front page -->
+		{% if request.user.is_superuser %}
+
+		{% if articles.approved_article == False %}
+		<a class='btn btn-default btn-xs' href = '{% url 'article_approve' pk=articles.pk %}'>
+					<span class='glyphicon glyphicon-ok'></span></a>
+
+		{% else %}
+
+		<a class='btn btn-default btn-xs' href = '{% url 'article_disapprove' pk=articles.pk %}'>
+					<span class='glyphicon glyphicon-remove'></span></a>
+
+		{% endif %}
+
+		{% endif %}
+
+		</div>
+		{% endfor %}
+
+
+
+
+		{% include 'Marketplace/paginator.html' %}
+
+
+
+	{% endblock %}
+
+
+
+</body>
+
+
+</html>

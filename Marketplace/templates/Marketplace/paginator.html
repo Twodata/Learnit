@@ -1,0 +1,34 @@
+{% load utility_tags %}
+
+
+<div align = 'center'>
+{% if article.has_other_pages %}
+<ul class="pagination pagination-sm">
+{% if article.has_previous %}
+<li><a href="{% append_to_query page=article.previous_page_number %}">&laquo;</a></li>
+{% else %}
+<li class="disabled"><span>&laquo;</span></li>
+{% endif %}
+{% for page_number in article.paginator.page_range %}
+{% if page_number == article.number %}
+<li class="active">
+<span>{{page_number}} <span class="sr-only">(current)
+</span></span>
+</li>
+{% else %}
+<li>
+<a href="{% append_to_query page=page_number %}">{{page_number}}</a>
+</li>
+{% endif %}
+{% endfor %}
+{% if article.has_next %}
+<li><a href="{% append_to_query page=article.next_page_number %}">&raquo;</a></li>
+{% else %}
+<li class="disabled"><span>&raquo;</span></li>
+{% endif %}
+</ul>
+{% endif %}
+
+
+
+

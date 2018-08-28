@@ -1,0 +1,71 @@
+{% extends 'Marketplace/base.html'%}
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title>{% block head %}Contact{% endblock %}</title>
+</head>
+
+<body>
+
+<h1>{% block title %}Contact Us{% endblock %}</h1>
+
+
+{% block body %}
+
+<br><br><br>
+
+
+<div class="container ">
+	<div class="row">
+		<div class="col-md-7 col-md-offset-1">
+				<div class="lead">
+						<h3 class='nav-color'>Business Listing Form</h3>
+
+				<form action = '/Marketplace/addmarket/' method = 'POST' enctype = 'multipart/form-data'>
+					{% csrf_token %}
+
+					{% for forms in form %}
+
+					<div class="form-group"><strong>{{ forms.label_tag }}</strong><br />
+					{{ forms }}</div>
+					
+					
+					{% endfor %}
+					<input class ="submit btn-primary" type = 'submit' name = 'submit' value = 'Submit' />
+
+					</form>
+					
+				</div>
+		</div>	
+
+			<br class="hidden-md hidden-lg">
+			<br class="hidden-md hidden-lg">
+
+		<div class="col-md-3 col-md-offset-1">
+			<h3 class='nav-color'>Contact Details</h3>
+				<div class="lead">
+					<br />
+						<b>Email Address :</b> info@learnit.com
+						<br />
+						<br />
+
+						<b>Phone Number :</b> +2348187486344
+						<br />
+				</div>
+		</div>
+
+	</div>
+	<br>
+
+	
+</div>
+
+
+
+
+{% endblock %}
+
+</body>
+
+</html>

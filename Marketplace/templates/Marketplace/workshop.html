@@ -1,0 +1,49 @@
+{% extends 'Marketplace/base.html'%}
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>{% block head %}Internship{% endblock %}</title>
+</head>
+
+<body class="container">
+
+	<h1>{% block title %}Internship{% endblock %}</h1>
+
+
+	{% block body %}
+		<br><br><hr>
+
+		<h3 class = 'nav-color'align="center">Workshops</h3>
+		
+		{% for workshop in workshops %}
+
+		<div class = 'detail'>
+		 <p class="nav-color"><h3><strong>{{workshop.workshop_title | linebreaks}}
+		 </h3></strong></p><br />
+		 {% if workshop.workshop_flyer != 'workshop' %}
+			<img class="img-responsive" src = '{{ MEDIA_URL }}{{workshop.workshop_flyer}}' 
+			height = '300' width = '400'>
+			{% endif %}
+			<br>
+		  <p><b>Workshop/Training Details: </b><br>{{workshop.workshop_details | linebreaks}}</p> 
+		  
+		<div align="right">{% if workshop.added_by == request.user.username %}				   
+		 <a href = '{% url 'workshop_remove' pk=workshop.pk %}'>
+		 <span class='glyphicon glyphicon-trash'></span>
+		 </a>
+		 {% endif %}</div>
+		</div>
+		{% endfor %}
+
+
+	
+	{% endblock %}
+
+
+</body>
+
+
+</html>

@@ -1,0 +1,43 @@
+{% extends 'Marketplace/base.html'%}
+<html>
+
+<head>
+<title>{% block head %}Internship{% endblock %}</title>
+</head>
+
+
+
+<body class="container">
+
+		<h1>{% block title %}Intern Advert Form{% endblock %}</h1>
+
+		{% block body%}
+
+		<br><br><br><br>
+         
+		
+		<div class="form-group lead" >
+    		<h3 class="nav-color">Internship Advert</h3> 
+		
+			<form action = '/Marketplace/add_internship/' 
+			method = 'POST' enctype = 'multipart/form-data'>
+			{% csrf_token %}
+
+			{% for forms in form %}
+
+        {{ forms.label_tag }}     <br>
+			{{ forms }}
+			<br />
+			<br />
+
+			{% endfor %}
+			<input class = 'submit btn-primary' type = 'submit' name = 'submit' value = 'Post' />
+
+			</form>
+		</div>
+
+		{% endblock %}
+
+</body>
+
+</html>

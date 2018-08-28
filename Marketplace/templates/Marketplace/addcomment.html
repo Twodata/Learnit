@@ -1,0 +1,39 @@
+{% extends 'Marketplace/base.html'%}
+<!--{% load utility_tags %}-->
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+<title>{% block head %}Comment{% endblock %}</title>
+</head>
+
+<body>
+
+<h1>{% block title %}Comment{% endblock %}</h1>
+
+
+{% block body %}
+
+		<br><br><br><br>
+
+		<div align="center">
+			<h3 class='nav-color'>New Comment</h3>
+			<form method = 'POST' enctype = 'multipart/form-data' class="form-group for">
+			{% csrf_token %}
+			{{ form.as_p }}
+			<button type='submit' class='save btn btn-primary btn-xs'>Submit Comment</button>
+			</form>
+		</div> 
+
+{% endblock %}
+
+
+
+</body>
+
+
+</html>
+
+

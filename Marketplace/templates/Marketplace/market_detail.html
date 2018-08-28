@@ -1,0 +1,62 @@
+{% extends 'Marketplace/base.html'%}
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>{% block head %}Learnit Directory_Detail{% endblock %}</title>
+</head>
+
+<body>
+
+	<div class="container">
+
+			<h1>{% block title %}Directory{% endblock %}</h1>
+
+
+			{% block body %}
+
+			<br><br><br><br>
+
+
+			<div class="detail" align="center">
+
+				<strong>{{markets.businessname}}</strong> | {{markets.section}} 
+				<br> {{markets.location}} | {{markets.email}} | {{markets.website}} <br /><br />
+				{% if markets.logo != 'logo' %} 
+				<img class="img-responsive" src = '{{ MEDIA_URL }}{{markets.logo}}' height = '300' width = '400' data-toggle="modal" data-target="#shopImage" type="button" class="btn btn-primary">
+				{% endif %}
+				<!-- Start of modal popup -->
+				<div id="shopImage" class="modal fade" tabindex="-1" role="dialog">
+				  <div class="modal-dialog modal-lg">
+				    <div class="modal-content">
+				        <div class="modal-body">
+				            <img src='{{ MEDIA_URL }}{{markets.logo}}' height = '300' width = '400' class="img-responsive">
+				        </div>
+				    </div>
+				  </div>
+				</div>
+				<!-- End of modal popup -->
+				<br /><br />{{markets.services}}
+				<br />
+				<div align="right">{% if markets.added_by == request.user.username %}
+				<a href = '{% url 'market_remove' pk=markets.pk %}'>
+				<span class='glyphicon glyphicon-trash'></span>
+				</a> </div>
+				{% endif %}
+        </div>
+        
+        </div>
+
+
+
+
+			{% endblock %}
+
+	</div>
+
+</body>
+
+
+</html>
