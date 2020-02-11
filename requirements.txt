@@ -37,7 +37,7 @@ datashape==0.5.4
 decorator==4.1.2
 distlib==0.2.5
 distributed==1.19.1
-Django==2.0.1
+Django==2.2.10
 django-jsonfield==1.0.1
 django-notify-x==0.1.9
 django-registration-redux==2.2
